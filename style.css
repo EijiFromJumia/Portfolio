@@ -1,0 +1,629 @@
+/* ==========================================================================
+   TOKENS
+   ========================================================================== */
+:root {
+  /* color */
+  --bg-void:        #0c1120;
+  --bg-night:       #141d36;
+  --bg-panel:       #1c2748;
+  --bg-panel-hi:    #232f56;
+  --accent-teal:    #52c4b8;
+  --accent-teal-dim:#3a8f88;
+  --accent-gold:    #d9b571;
+  --text-parchment: #f2ecda;
+  --text-muted:     #99a4c6;
+  --line-hairline:  rgba(217, 181, 113, 0.22);
+
+  /* elemental accents (weapon waypoints) */
+  --el-ember:  #e0764f;
+  --el-tide:   #4a90c4;
+  --el-gale:   #7dd0b0;
+  --el-aether: #b895d9;
+  --el-umbra:  #8a4f6e;
+
+  /* type */
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Manrope', sans-serif;
+
+  /* layout */
+  --max-width: 1120px;
+  --edge: clamp(1.25rem, 5vw, 4rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* ==========================================================================
+   RESET / BASE
+   ========================================================================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-night);
+  color: var(--text-parchment);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; display: block; }
+
+ul { list-style: none; }
+
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-teal);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--text-parchment);
+}
+
+/* thin gold hairline divider, used sparingly */
+.hr-gold {
+  width: 56px;
+  height: 1px;
+  background: var(--accent-gold);
+  margin: 1.1rem 0;
+}
+
+/* ==========================================================================
+   SCROLL PROGRESS RAIL (decorative, subtle)
+   ========================================================================== */
+.scroll-rail {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  z-index: 100;
+}
+.scroll-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-teal), var(--accent-gold));
+  transition: width 0.1s linear;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 20%, #1a2547 0%, var(--bg-void) 70%);
+  padding: var(--edge);
+}
+
+#starfield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.hero .eyebrow {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.hero-name {
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+  background: linear-gradient(100deg,
+    var(--text-parchment) 20%,
+    var(--accent-gold) 40%,
+    var(--accent-teal) 50%,
+    var(--accent-gold) 60%,
+    var(--text-parchment) 80%);
+  background-size: 240% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 7s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 100% 0; }
+  50%  { background-position: 0% 0; }
+  100% { background-position: 100% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-name { animation: none; background-position: 40% 0; }
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+  color: var(--text-muted);
+  margin-top: 0.9rem;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 0.9rem;
+  margin-top: 2rem;
+}
+
+.hero-tags li {
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--line-hairline);
+  border-radius: 999px;
+  backdrop-filter: blur(2px);
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+.scroll-cue:hover, .scroll-cue:focus-visible { color: var(--accent-gold); }
+.scroll-cue svg { animation: bob 2.2s ease-in-out infinite; }
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* ==========================================================================
+   SECTION HEAD (shared)
+   ========================================================================== */
+.section-head {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.section-head h2 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  margin-top: 0.5rem;
+}
+.section-sub {
+  color: var(--text-muted);
+  max-width: 46ch;
+  margin: 0.9rem auto 0;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   CODEX (featured work)
+   ========================================================================== */
+.codex {
+  padding: clamp(4rem, 10vh, 7rem) 0;
+  background: var(--bg-night);
+}
+
+/* .entry-media / iframe are reused by the games section below */
+.entry-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-void);
+}
+
+.entry-media iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* base gem marker (color overridden per weapon element via --local) */
+.gem {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  background: var(--accent-teal);
+  flex-shrink: 0;
+}
+
+/* tag pills + link, reused by both the codex (if extended) and games section */
+.entry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.entry-tags li {
+  font-size: 0.72rem;
+  color: var(--text-parchment);
+  background: var(--bg-panel-hi);
+  padding: 0.28rem 0.7rem;
+  border-radius: 4px;
+}
+
+.entry-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-teal);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+.entry-link i { font-size: 0.7rem; }
+.entry-link:hover, .entry-link:focus-visible { gap: 0.6rem; color: var(--accent-gold); }
+
+/* ==========================================================================
+   ABOUT
+   ========================================================================== */
+.about {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vh, 6rem) var(--edge);
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.about.in-view { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 700px) {
+  .about { grid-template-columns: 1fr; }
+}
+
+.about-frame {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: var(--bg-panel);
+  padding: 1.1rem;
+}
+
+.frame-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--accent-gold);
+}
+.frame-corner.tl { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.frame-corner.tr { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
+.frame-corner.bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }
+.frame-corner.br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+.avatar-placeholder {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  background: linear-gradient(160deg, var(--bg-panel-hi), var(--bg-void));
+}
+.avatar-placeholder i { font-size: 2.4rem; color: var(--accent-teal-dim); }
+
+.about-text h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0.5rem 0 1.1rem; }
+.about-text p { color: var(--text-muted); margin-bottom: 0.9rem; max-width: 58ch; }
+
+.skill-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.4rem;
+}
+.skill-cloud li {
+  font-size: 0.78rem;
+  color: var(--accent-teal);
+  border: 1px solid var(--accent-teal-dim);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+}
+
+/* ==========================================================================
+   CONTACT / FOOTER
+   ========================================================================== */
+.contact {
+  text-align: center;
+  padding: clamp(4rem, 12vh, 8rem) var(--edge) 3rem;
+  background: radial-gradient(ellipse at 50% 100%, #1a2547 0%, var(--bg-void) 75%);
+  border-top: 1px solid var(--line-hairline);
+}
+
+.contact h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0.6rem 0 1.2rem;
+}
+
+.contact-email a {
+  font-size: 1.05rem;
+  color: var(--accent-teal);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.contact-email a:hover, .contact-email a:focus-visible {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.4rem;
+  margin: 2.2rem 0 3rem;
+}
+.social-row a {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-hairline);
+  border-radius: 50%;
+  font-size: 1rem;
+  color: var(--text-muted);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.social-row a:hover, .social-row a:focus-visible {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  transform: translateY(-3px);
+}
+
+.copyright {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   SECTION DIVIDER (shimmering gold hairline signature)
+   ========================================================================== */
+.divider-shimmer {
+  position: relative;
+  display: block;
+  width: 64px;
+  height: 1px;
+  margin: 1rem auto 0;
+  background: var(--accent-gold);
+  overflow: hidden;
+}
+.divider-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--text-parchment), transparent);
+  animation: divider-sweep 3.4s ease-in-out infinite;
+}
+@keyframes divider-sweep {
+  0%   { left: -60%; }
+  55%  { left: 120%; }
+  100% { left: 120%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .divider-shimmer::after { animation: none; display: none; }
+}
+
+/* ==========================================================================
+   WEAPON GROUPS (moveset codex subsections)
+   ========================================================================== */
+.weapon-group {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+  margin-bottom: clamp(3rem, 7vh, 5rem);
+}
+.weapon-group:last-child { margin-bottom: 0; }
+
+/* map each weapon's element to a local accent variable */
+.weapon-group[data-element="gale"]   { --local: var(--el-gale); }
+.weapon-group[data-element="tide"]   { --local: var(--el-tide); }
+.weapon-group[data-element="aether"] { --local: var(--el-aether); }
+.weapon-group[data-element="umbra"]  { --local: var(--el-umbra); }
+.weapon-group[data-element="ember"]  { --local: var(--el-ember); }
+
+.weapon-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line-hairline);
+}
+
+.weapon-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: var(--local);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--local) 55%, transparent));
+}
+.weapon-icon svg { width: 100%; height: 100%; }
+
+.weapon-head h3 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  color: var(--text-parchment);
+}
+
+.weapon-count {
+  margin-left: auto;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.clip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.4rem;
+}
+
+.clip {
+  background: var(--bg-panel);
+  border: 1px solid var(--line-hairline);
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.clip.in-view { opacity: 1; transform: translateY(0); }
+.clip:hover, .clip:focus-within {
+  border-color: var(--local);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--local) 40%, transparent),
+              0 10px 30px rgba(0,0,0,0.4);
+}
+
+.clip-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-void);
+  perspective: 700px;
+  overflow: hidden;
+}
+.clip-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+/* subtle glare sweep that follows tilt (positioned via JS custom properties) */
+.glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%),
+              rgba(255,255,255,0.16), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.clip-media:hover .glare, .clip-media:focus-within .glare { opacity: 1; }
+
+figcaption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+figcaption .gem { background: var(--local); }
+.clip-link {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  transition: color 0.2s ease;
+}
+.clip-link:hover, .clip-link:focus-visible { color: var(--local); }
+
+/* ==========================================================================
+   GAMES SECTION
+   ========================================================================== */
+.games {
+  padding: clamp(3rem, 8vh, 5rem) 0 clamp(4rem, 10vh, 7rem);
+  background: var(--bg-void);
+  border-top: 1px solid var(--line-hairline);
+  border-bottom: 1px solid var(--line-hairline);
+}
+
+.games-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.25rem;
+}
+@media (max-width: 800px) {
+  .games-grid { grid-template-columns: 1fr; }
+}
+
+.game-entry {
+  background: var(--bg-panel);
+  border: 1px solid var(--line-hairline);
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.game-entry.in-view { opacity: 1; transform: translateY(0); }
+.game-entry:hover, .game-entry:focus-within {
+  border-color: var(--accent-gold);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.game-media { background: var(--bg-void); }
+.game-media.single { aspect-ratio: 16 / 9; }
+.game-media.single img { width: 100%; height: 100%; object-fit: cover; }
+
+.game-media.two-up {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.game-media .entry-media { aspect-ratio: 16 / 9; }
+.game-media iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.game-body { padding: 1.6rem 1.6rem 1.85rem; }
+.game-body h3 { font-size: 1.5rem; margin-bottom: 0.6rem; }
+.game-body > p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.1rem; }
+
+/* ==========================================================================
+   REDUCED-MOTION: kill tilt transforms entirely
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .clip-media video { transition: none !important; transform: none !important; }
+  .glare { display: none; }
+}
