@@ -29,7 +29,7 @@
 
   /* layout */
   --max-width: 1120px;
-   --edge: clamp(2.5rem, 16vw, 12rem);
+   --edge: clamp(1.75rem, 7vw, 5rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -655,7 +655,7 @@ h1, h2, h3 {
   .hero-crest { animation: none; }
 }
 
-
+/* ==========================================================================
    WEAPON GROUPS (moveset codex subsections)
    ========================================================================== */
 .weapon-group {
