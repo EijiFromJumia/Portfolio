@@ -226,7 +226,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 // ==========================================================================
 (function weaponIconBurst() {
   if (prefersReducedMotion) return;
-  const heads = document.querySelectorAll('.weapon-head, .avatar-placeholder');
+  const heads = document.querySelectorAll('.weapon-head');
   const assets = ['sparkle.svg', 'mote.svg'];
 
   heads.forEach(head => {
@@ -247,6 +247,33 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
         p.addEventListener('animationend', () => p.remove());
       }
     });
+  });
+})();
+
+// ==========================================================================
+// Discord copy-to-clipboard — shows a brief "Copied!" toast on click
+// ==========================================================================
+(function copyDiscord() {
+  const link = document.querySelector('.copy-discord');
+  if (!link) return;
+  const li = link.closest('.social-copy');
+
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const text = link.dataset.copy;
+
+    const showToast = () => {
+      if (!li) return;
+      li.classList.add('copied');
+      clearTimeout(li._copyTimeout);
+      li._copyTimeout = setTimeout(() => li.classList.remove('copied'), 1600);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showToast).catch(showToast);
+    } else {
+      showToast();
+    }
   });
 })();
 

@@ -330,90 +330,23 @@ h1, h2, h3 {
    ========================================================================== */
 .about {
   position: relative;
-  max-width: var(--max-width);
+  max-width: 760px;
   margin: 0 auto;
   padding: clamp(3rem, 8vh, 6rem) var(--edge);
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: clamp(2rem, 6vw, 5rem);
-  align-items: start;
+  text-align: center;
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .about.in-view { opacity: 1; transform: translateY(0); }
 
-@media (max-width: 700px) {
-  .about { grid-template-columns: 1fr; }
-}
-
-.about-frame {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  background: var(--bg-panel);
-  padding: 1.1rem;
-}
-
-.frame-corner {
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  background: var(--accent-gold);
-  -webkit-mask-image: url('corner-flourish.svg');
-  mask-image: url('corner-flourish.svg');
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  opacity: 0.9;
-}
-.frame-corner.tl { top: -6px; left: -6px; }
-.frame-corner.tr { top: -6px; right: -6px; transform: rotate(90deg); }
-.frame-corner.br { bottom: -6px; right: -6px; transform: rotate(180deg); }
-.frame-corner.bl { bottom: -6px; left: -6px; transform: rotate(270deg); }
-
-.avatar-placeholder {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  color: var(--text-muted);
-  font-size: 0.78rem;
-  background: linear-gradient(160deg, var(--bg-panel-hi), var(--bg-void));
-}
-.avatar-placeholder i { position: relative; z-index: 1; font-size: 2.4rem; color: var(--accent-teal-dim); }
-
-/* soft rotating burst glow behind the placeholder icon — image asset */
-.avatar-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150px;
-  height: 150px;
-  transform: translate(-50%, -50%);
-  background: var(--accent-teal-dim);
-  -webkit-mask-image: url('element-burst.svg');
-  mask-image: url('element-burst.svg');
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  opacity: 0.3;
-  animation: ring-spin 22s linear infinite, burst-pulse 4.5s ease-in-out infinite;
-  pointer-events: none;
-}
-
 .about-text h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0.5rem 0 1.1rem; }
-.about-text p { color: var(--text-muted); margin-bottom: 0.9rem; max-width: 58ch; }
+.about-text p { color: var(--text-muted); margin: 0 auto 0.9rem; max-width: 58ch; }
 
 .skill-cloud {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.55rem;
   margin-top: 1.4rem;
 }
@@ -474,6 +407,37 @@ h1, h2, h3 {
   color: var(--accent-gold);
   border-color: var(--accent-gold);
   transform: translateY(-3px);
+}
+
+.roblox-logo {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: currentColor;
+  display: block;
+}
+
+.social-copy { position: relative; }
+.copy-toast {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  background: var(--bg-panel-hi);
+  color: var(--accent-gold);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.32rem 0.65rem;
+  border-radius: 4px;
+  border: 1px solid var(--line-hairline);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.social-copy.copied .copy-toast {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .copyright {
@@ -556,7 +520,6 @@ h1, h2, h3 {
   position: relative;
   z-index: 1;
 }
-.avatar-placeholder > .particle-field { z-index: 0; }
 
 .particle {
   position: absolute;
