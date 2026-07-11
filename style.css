@@ -29,7 +29,7 @@
 
   /* layout */
   --max-width: 1120px;
-   --edge: clamp(2.5rem, 10vw, 8rem);
+   --edge: clamp(2.5rem, 16vw, 12rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
