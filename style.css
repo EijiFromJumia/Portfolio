@@ -13,6 +13,7 @@
   --text-parchment: #f2ecda;
   --text-muted:     #99a4c6;
   --line-hairline:  rgba(217, 181, 113, 0.22);
+  --grain: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22200%22%20height%3D%22200%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.9%22%20numOctaves%3D%222%22%20stitchTiles%3D%22stitch%22/%3E%3CfeColorMatrix%20type%3D%22matrix%22%20values%3D%220%200%200%200%200.95%20%200%200%200%200%200.93%20%200%200%200%200%200.86%20%200%200%200%200.05%200%22/%3E%3C/filter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url%28%23n%29%22/%3E%3C/svg%3E");
 
   /* elemental accents (weapon waypoints) */
   --el-ember:  #e0764f;
@@ -20,6 +21,7 @@
   --el-gale:   #7dd0b0;
   --el-aether: #b895d9;
   --el-umbra:  #8a4f6e;
+  --el-volt:   #e0567e;
 
   /* type */
   --font-display: 'Cormorant Garamond', serif;
@@ -48,6 +50,20 @@ body {
   font-weight: 400;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* subtle grain overlay across the whole page for a tactile, parchment-like finish */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: 200px 200px;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 50;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -124,7 +140,18 @@ h1, h2, h3 {
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 0;
   display: block;
+}
+
+.hero-mountains {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 42%;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .hero-inner {
@@ -237,6 +264,7 @@ h1, h2, h3 {
    CODEX (featured work)
    ========================================================================== */
 .codex {
+  position: relative;
   padding: clamp(4rem, 10vh, 7rem) 0;
   background: var(--bg-night);
 }
@@ -255,14 +283,18 @@ h1, h2, h3 {
   display: block;
 }
 
-/* base gem marker (color overridden per weapon element via --local) */
+/* base gem marker (color overridden per weapon element via --local) — faceted gem image, not a CSS square */
 .gem {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  transform: rotate(45deg);
-  background: var(--accent-teal);
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
+  background: var(--accent-teal);
+  -webkit-mask-image: url('gem-facet.svg');
+  mask-image: url('gem-facet.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 /* tag pills + link, reused by both the codex (if extended) and games section */
@@ -297,6 +329,7 @@ h1, h2, h3 {
    ABOUT
    ========================================================================== */
 .about {
+  position: relative;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: clamp(3rem, 8vh, 6rem) var(--edge);
@@ -323,18 +356,27 @@ h1, h2, h3 {
 
 .frame-corner {
   position: absolute;
-  width: 22px;
-  height: 22px;
-  border: 1.5px solid var(--accent-gold);
+  width: 36px;
+  height: 36px;
+  background: var(--accent-gold);
+  -webkit-mask-image: url('corner-flourish.svg');
+  mask-image: url('corner-flourish.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  opacity: 0.9;
 }
-.frame-corner.tl { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
-.frame-corner.tr { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
-.frame-corner.bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }
-.frame-corner.br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+.frame-corner.tl { top: -6px; left: -6px; }
+.frame-corner.tr { top: -6px; right: -6px; transform: rotate(90deg); }
+.frame-corner.br { bottom: -6px; right: -6px; transform: rotate(180deg); }
+.frame-corner.bl { bottom: -6px; left: -6px; transform: rotate(270deg); }
 
 .avatar-placeholder {
+  position: relative;
   height: 100%;
   width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -344,7 +386,27 @@ h1, h2, h3 {
   font-size: 0.78rem;
   background: linear-gradient(160deg, var(--bg-panel-hi), var(--bg-void));
 }
-.avatar-placeholder i { font-size: 2.4rem; color: var(--accent-teal-dim); }
+.avatar-placeholder i { position: relative; z-index: 1; font-size: 2.4rem; color: var(--accent-teal-dim); }
+
+/* soft rotating burst glow behind the placeholder icon — image asset */
+.avatar-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  background: var(--accent-teal-dim);
+  -webkit-mask-image: url('element-burst.svg');
+  mask-image: url('element-burst.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  opacity: 0.3;
+  animation: ring-spin 22s linear infinite, burst-pulse 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
 
 .about-text h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0.5rem 0 1.1rem; }
 .about-text p { color: var(--text-muted); margin-bottom: 0.9rem; max-width: 58ch; }
@@ -367,6 +429,7 @@ h1, h2, h3 {
    CONTACT / FOOTER
    ========================================================================== */
 .contact {
+  position: relative;
   text-align: center;
   padding: clamp(4rem, 12vh, 8rem) var(--edge) 3rem;
   background: radial-gradient(ellipse at 50% 100%, #1a2547 0%, var(--bg-void) 75%);
@@ -424,14 +487,37 @@ h1, h2, h3 {
    ========================================================================== */
 .divider-shimmer {
   position: relative;
-  display: block;
-  width: 64px;
-  height: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 12px;
   margin: 1rem auto 0;
+}
+.divider-shimmer::before {
+  /* the gem ornament in the center — faceted image asset */
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--accent-gold);
+  -webkit-mask-image: url('gem-facet.svg');
+  mask-image: url('gem-facet.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent-gold) 60%, transparent));
+  z-index: 1;
+}
+.divider-shimmer .line {
+  position: relative;
+  width: 100%;
+  height: 1px;
   background: var(--accent-gold);
   overflow: hidden;
 }
-.divider-shimmer::after {
+.divider-shimmer .line::after {
   content: '';
   position: absolute;
   top: 0; left: -60%;
@@ -446,10 +532,130 @@ h1, h2, h3 {
   100% { left: 120%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .divider-shimmer::after { animation: none; display: none; }
+  .divider-shimmer .line::after { animation: none; display: none; }
 }
 
 /* ==========================================================================
+   AMBIENT PARTICLES (floating sparkle/mote image assets, spawned via JS)
+   ========================================================================== */
+.particle-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero .particle-field { z-index: 1; }
+.codex > .particle-field,
+.games > .particle-field,
+.about > .particle-field,
+.contact > .particle-field { z-index: 0; }
+.codex > *:not(.particle-field),
+.games > *:not(.particle-field),
+.about > *:not(.particle-field),
+.contact > *:not(.particle-field) {
+  position: relative;
+  z-index: 1;
+}
+.avatar-placeholder > .particle-field { z-index: 0; }
+
+.particle {
+  position: absolute;
+  bottom: -8%;
+  left: var(--x, 50%);
+  width: var(--size, 12px);
+  height: var(--size, 12px);
+  opacity: 0;
+  animation: particle-rise var(--duration, 10s) ease-in var(--delay, 0s) infinite;
+  filter: drop-shadow(0 0 4px rgba(217, 181, 113, 0.45));
+}
+@keyframes particle-rise {
+  0%   { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+  12%  { opacity: 0.9; }
+  80%  { opacity: 0.55; }
+  100% { opacity: 0; transform: translateY(-130%) scale(1) rotate(160deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .particle { display: none; }
+}
+
+/* burst particles spawned on weapon-icon hover */
+.burst-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--size, 10px);
+  height: var(--size, 10px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: burst-fly 0.7s ease-out forwards;
+  z-index: 5;
+}
+@keyframes burst-fly {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(0.4); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(1); }
+}
+
+/* ==========================================================================
+   WING ORNAMENTS flanking heading text — image asset, mirrored via scaleX
+   ========================================================================== */
+.section-head h2,
+.about-text h2,
+.contact h2 {
+  position: relative;
+  display: inline-block;
+}
+.section-head h2::before, .section-head h2::after,
+.about-text h2::before, .about-text h2::after,
+.contact h2::before, .contact h2::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 68px;
+  height: 20px;
+  background: var(--accent-gold);
+  -webkit-mask-image: url('wing-ornament.svg');
+  mask-image: url('wing-ornament.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  opacity: 0.5;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.section-head h2::before, .about-text h2::before, .contact h2::before {
+  right: 100%;
+  margin-right: 16px;
+}
+.section-head h2::after, .about-text h2::after, .contact h2::after {
+  left: 100%;
+  margin-left: 16px;
+  transform: translateY(-50%) scaleX(-1);
+}
+@media (max-width: 640px) {
+  .section-head h2::before, .section-head h2::after,
+  .about-text h2::before, .about-text h2::after,
+  .contact h2::before, .contact h2::after {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   HERO CREST ornament above the eyebrow text
+   ========================================================================== */
+.hero-crest {
+  display: block;
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 0.9rem;
+  filter: drop-shadow(0 0 10px rgba(217, 181, 113, 0.5));
+  animation: ring-spin 15s linear infinite, burst-pulse 3.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-crest { animation: none; }
+}
+
+
    WEAPON GROUPS (moveset codex subsections)
    ========================================================================== */
 .weapon-group {
@@ -467,6 +673,7 @@ h1, h2, h3 {
 .weapon-group[data-element="aether"] { --local: var(--el-aether); }
 .weapon-group[data-element="umbra"]  { --local: var(--el-umbra); }
 .weapon-group[data-element="ember"]  { --local: var(--el-ember); }
+.weapon-group[data-element="volt"]   { --local: var(--el-volt); }
 
 .weapon-head {
   display: flex;
@@ -478,13 +685,47 @@ h1, h2, h3 {
 }
 
 .weapon-icon {
+  position: relative;
   width: 34px;
   height: 34px;
   flex-shrink: 0;
   color: var(--local);
   filter: drop-shadow(0 0 6px color-mix(in srgb, var(--local) 55%, transparent));
 }
-.weapon-icon svg { width: 100%; height: 100%; }
+.weapon-icon svg { position: relative; z-index: 1; width: 100%; height: 100%; }
+
+/* radiating rarity-burst behind the icon, like a showcase waypoint — image asset, not a CSS gradient */
+.weapon-icon::before {
+  content: '';
+  position: absolute;
+  inset: -22px;
+  background: var(--local);
+  -webkit-mask-image: url('element-burst.svg');
+  mask-image: url('element-burst.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  opacity: 0.45;
+  animation: ring-spin 16s linear infinite, burst-pulse 3.2s ease-in-out infinite;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.weapon-head:hover .weapon-icon::before {
+  filter: brightness(1.5);
+  opacity: 0.75;
+}
+@keyframes ring-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes burst-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 0.6; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .weapon-icon::before { animation: none; }
+}
 
 .weapon-head h3 {
   font-size: clamp(1.4rem, 3vw, 1.8rem);
@@ -548,6 +789,23 @@ h1, h2, h3 {
 }
 .clip-media:hover .glare, .clip-media:focus-within .glare { opacity: 1; }
 
+/* sweeping shine — image asset, gacha-style highlight pass on hover */
+.clip-media .shine {
+  position: absolute;
+  inset: 0;
+  background: url('shine-streak.svg') no-repeat center / 55% 140%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-140%);
+  transition: transform 0.05s linear, opacity 0.05s linear;
+  pointer-events: none;
+}
+.clip-media:hover .shine, .clip-media:focus-within .shine {
+  opacity: 0.85;
+  transform: translateX(140%);
+  transition: transform 0.95s ease, opacity 0.95s ease;
+}
+
 figcaption {
   display: flex;
   align-items: center;
@@ -571,6 +829,7 @@ figcaption .gem { background: var(--local); }
    GAMES SECTION
    ========================================================================== */
 .games {
+  position: relative;
   padding: clamp(3rem, 8vh, 5rem) 0 clamp(4rem, 10vh, 7rem);
   background: var(--bg-void);
   border-top: 1px solid var(--line-hairline);

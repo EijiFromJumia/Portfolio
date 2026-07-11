@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 40">
+  <!-- main spine curve -->
+  <path d="M138 20 C 100 20 80 8 60 8 C 40 8 30 16 2 20" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>
+  <!-- secondary lower curve -->
+  <path d="M120 24 C 95 24 82 18 66 18" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
+  <!-- small feather ticks -->
+  <path d="M108 20 L112 13" stroke="#ffffff" stroke-width="1" stroke-linecap="round" opacity="0.55"/>
+  <path d="M94 15 L97 8" stroke="#ffffff" stroke-width="1" stroke-linecap="round" opacity="0.55"/>
+  <path d="M78 10 L80 4" stroke="#ffffff" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+  <!-- central diamond -->
+  <path d="M60 3 L65 8 L60 13 L55 8 Z" fill="#ffffff"/>
+  <!-- tapering end diamonds -->
+  <circle cx="4" cy="20" r="1.6" fill="#ffffff" opacity="0.8"/>
+</svg>

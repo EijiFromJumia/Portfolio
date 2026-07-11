@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <path d="M12 1 L20 8 L20 16 L12 23 L4 16 L4 8 Z" fill="#ffffff"/>
+  <path d="M12 1 L20 8 L12 12 Z" fill="#ffffff" opacity="0.45"/>
+  <path d="M4 8 L12 12 L12 1 Z" fill="#ffffff" opacity="0.7"/>
+  <path d="M4 8 L12 12 L4 16 Z" fill="#ffffff" opacity="0.3"/>
+  <path d="M20 8 L12 12 L20 16 Z" fill="#ffffff" opacity="0.55"/>
+  <path d="M12 12 L4 16 L12 23 Z" fill="#ffffff" opacity="0.85"/>
+  <path d="M12 12 L20 16 L12 23 Z" fill="#ffffff" opacity="0.65"/>
+</svg>

@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Name — Game Developer Portfolio</title>
-<meta name="description" content="Roblox combat systems, weapon movesets, and shipped game projects.">
+<meta name="description" content="Roblox gameplay programming, weapon movesets, and shipped game projects.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -21,14 +22,38 @@
 <header class="hero">
   <canvas id="starfield" aria-hidden="true"></canvas>
 
+  <svg class="hero-mountains" viewBox="0 0 1440 420" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="rimGold" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#d9b571" stop-opacity="0"/>
+        <stop offset="50%" stop-color="#d9b571" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#d9b571" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- far ridge -->
+    <path d="M0,260 L110,205 L230,245 L360,175 L480,230 L620,160 L760,225 L900,180 L1040,235 L1180,190 L1320,240 L1440,210 L1440,420 L0,420 Z"
+          fill="#1c2748" opacity="0.55"/>
+    <!-- mid ridge -->
+    <path d="M0,320 L140,260 L260,300 L400,235 L540,290 L680,225 L820,285 L960,240 L1100,295 L1260,250 L1440,300 L1440,420 L0,420 Z"
+          fill="#141d36" opacity="0.75"/>
+    <!-- near ridge with faint gold rim light -->
+    <path d="M0,380 L160,330 L320,370 L470,310 L620,360 L780,300 L940,365 L1100,320 L1260,375 L1440,340 L1440,420 L0,420 Z"
+          fill="#0c1120"/>
+    <path d="M0,380 L160,330 L320,370 L470,310 L620,360 L780,300 L940,365 L1100,320 L1260,375 L1440,340"
+          fill="none" stroke="url(#rimGold)" stroke-width="2" opacity="0.5"/>
+  </svg>
+
+  <div class="particle-field" data-count="16" aria-hidden="true"></div>
+
   <div class="hero-inner">
+    <img src="banner-crest.svg" class="hero-crest" alt="" aria-hidden="true">
     <p class="eyebrow">Game Developer &amp; Designer</p>
     <h1 class="hero-name">Your Name</h1>
-    <p class="hero-tagline">Combat that feels good in your hands.</p>
+    <p class="hero-tagline">Systems and mechanics that feel good to play.</p>
 
     <ul class="hero-tags">
       <li>Roblox Studio</li>
-      <li>Combat &amp; Moveset Design</li>
+      <li>Gameplay Programming</li>
       <li>Luau Scripting</li>
     </ul>
   </div>
@@ -45,11 +70,12 @@
 
 <!-- ============ MOVESET CODEX ============ -->
 <section class="codex" id="codex">
+  <div class="particle-field" data-count="12" aria-hidden="true"></div>
   <div class="section-head">
     <p class="eyebrow">Moveset Codex</p>
     <h2>The Codex</h2>
-    <span class="divider-shimmer" aria-hidden="true"></span>
-    <p class="section-sub">Weapon movesets and combat animations, prototyped and tested in Roblox Studio.</p>
+    <span class="divider-shimmer" aria-hidden="true"><span class="line"></span></span>
+    <p class="section-sub">Weapon movesets and gameplay systems, prototyped and tested in Roblox Studio.</p>
   </div>
 
   <!-- ===== BOW ===== -->
@@ -63,15 +89,15 @@
     </div>
     <div class="clip-grid">
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/aac560f9c16511709a0f462949d21079-gif.jpg" data-src="https://i.gyazo.com/aac560f9c16511709a0f462949d21079.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/aac560f9c16511709a0f462949d21079-gif.jpg" data-src="https://i.gyazo.com/aac560f9c16511709a0f462949d21079.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 01<a href="https://gyazo.com/aac560f9c16511709a0f462949d21079" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/fce1bc82acd0112ac277290a0f13fffa-gif.jpg" data-src="https://i.gyazo.com/fce1bc82acd0112ac277290a0f13fffa.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/fce1bc82acd0112ac277290a0f13fffa-gif.jpg" data-src="https://i.gyazo.com/fce1bc82acd0112ac277290a0f13fffa.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 02<a href="https://gyazo.com/fce1bc82acd0112ac277290a0f13fffa" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/6db0f7285b62bbedb6535f4cd7540734-gif.jpg" data-src="https://i.gyazo.com/6db0f7285b62bbedb6535f4cd7540734.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/6db0f7285b62bbedb6535f4cd7540734-gif.jpg" data-src="https://i.gyazo.com/6db0f7285b62bbedb6535f4cd7540734.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 03<a href="https://gyazo.com/6db0f7285b62bbedb6535f4cd7540734" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
     </div>
@@ -88,11 +114,11 @@
     </div>
     <div class="clip-grid">
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/91d995584068a626489205160d564973-gif.jpg" data-src="https://i.gyazo.com/91d995584068a626489205160d564973.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/91d995584068a626489205160d564973-gif.jpg" data-src="https://i.gyazo.com/91d995584068a626489205160d564973.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 01<a href="https://gyazo.com/91d995584068a626489205160d564973" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/ed95a94e9e3d154ffd52cd62dfb40fba-gif.jpg" data-src="https://i.gyazo.com/ed95a94e9e3d154ffd52cd62dfb40fba.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/ed95a94e9e3d154ffd52cd62dfb40fba-gif.jpg" data-src="https://i.gyazo.com/ed95a94e9e3d154ffd52cd62dfb40fba.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 02<a href="https://gyazo.com/ed95a94e9e3d154ffd52cd62dfb40fba" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
     </div>
@@ -109,7 +135,7 @@
     </div>
     <div class="clip-grid">
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/6ce5c83fc871a8b354f76070397f0190-gif.jpg" data-src="https://i.gyazo.com/6ce5c83fc871a8b354f76070397f0190.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/6ce5c83fc871a8b354f76070397f0190-gif.jpg" data-src="https://i.gyazo.com/6ce5c83fc871a8b354f76070397f0190.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 01<a href="https://gyazo.com/6ce5c83fc871a8b354f76070397f0190" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
     </div>
@@ -126,15 +152,15 @@
     </div>
     <div class="clip-grid">
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/2898606dc169d41985f984ae6af9c216-gif.jpg" data-src="https://i.gyazo.com/2898606dc169d41985f984ae6af9c216.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/2898606dc169d41985f984ae6af9c216-gif.jpg" data-src="https://i.gyazo.com/2898606dc169d41985f984ae6af9c216.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 01<a href="https://gyazo.com/2898606dc169d41985f984ae6af9c216" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/5ab312fce64d2aeaf076b79daf1335c1-gif.jpg" data-src="https://i.gyazo.com/5ab312fce64d2aeaf076b79daf1335c1.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/5ab312fce64d2aeaf076b79daf1335c1-gif.jpg" data-src="https://i.gyazo.com/5ab312fce64d2aeaf076b79daf1335c1.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 02<a href="https://gyazo.com/5ab312fce64d2aeaf076b79daf1335c1" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/41b3382f7cda3fc5b4f54736856cffb9-gif.jpg" data-src="https://i.gyazo.com/41b3382f7cda3fc5b4f54736856cffb9.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/41b3382f7cda3fc5b4f54736856cffb9-gif.jpg" data-src="https://i.gyazo.com/41b3382f7cda3fc5b4f54736856cffb9.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 03<a href="https://gyazo.com/41b3382f7cda3fc5b4f54736856cffb9" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
     </div>
@@ -151,24 +177,53 @@
     </div>
     <div class="clip-grid">
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/c90e43354b68b7bb9926d59910cc0d5e-gif.jpg" data-src="https://i.gyazo.com/c90e43354b68b7bb9926d59910cc0d5e.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/c90e43354b68b7bb9926d59910cc0d5e-gif.jpg" data-src="https://i.gyazo.com/c90e43354b68b7bb9926d59910cc0d5e.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 01<a href="https://gyazo.com/c90e43354b68b7bb9926d59910cc0d5e" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
       <figure class="clip">
-        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/7f9672fd62fb7c29dfc187ef9981b8c9-gif.jpg" data-src="https://i.gyazo.com/7f9672fd62fb7c29dfc187ef9981b8c9.mp4"></video><div class="glare"></div></div>
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/7f9672fd62fb7c29dfc187ef9981b8c9-gif.jpg" data-src="https://i.gyazo.com/7f9672fd62fb7c29dfc187ef9981b8c9.mp4"></video><div class="glare"></div><div class="shine"></div></div>
         <figcaption><span class="gem"></span>Clip 02<a href="https://gyazo.com/7f9672fd62fb7c29dfc187ef9981b8c9" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
       </figure>
     </div>
   </div>
 
+  <!-- ===== 3RD PERSON GUN SYSTEM ===== -->
+  <div class="weapon-group" data-element="volt">
+    <div class="weapon-head">
+      <span class="weapon-icon" aria-hidden="true">
+        <svg viewBox="0 0 40 40">
+          <rect x="8" y="14" width="24" height="5.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <rect x="32" y="15.2" width="6" height="3" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M12 19.5 L21 19.5 L21 33 L17.5 33 L12 25 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M21 21.5 C18 21.5 18 26.5 21 26.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+          <rect x="13" y="11.5" width="3" height="2.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+      </span>
+      <h3>3rd Person Gun System</h3>
+      <span class="weapon-count">2 clips</span>
+    </div>
+    <div class="clip-grid">
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/2e2ddd8f07550ac87f72754282ccbc1d-gif.jpg" data-src="https://i.gyazo.com/2e2ddd8f07550ac87f72754282ccbc1d.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 01<a href="https://gyazo.com/2e2ddd8f07550ac87f72754282ccbc1d" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://i.gyazo.com/thumb/1200/969d0ad1e3f4b6a273c172a5ca75a6c5-gif.jpg" data-src="https://i.gyazo.com/969d0ad1e3f4b6a273c172a5ca75a6c5.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 02<a href="https://gyazo.com/969d0ad1e3f4b6a273c172a5ca75a6c5" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="particle-field" data-count="10" aria-hidden="true"></div>
 </section>
 
 <!-- ============ SHIPPED GAMES ============ -->
 <section class="games" id="games">
+  <div class="particle-field" data-count="10" aria-hidden="true"></div>
   <div class="section-head">
     <p class="eyebrow">Shipped Work</p>
     <h2>Games</h2>
-    <span class="divider-shimmer" aria-hidden="true"></span>
+    <span class="divider-shimmer" aria-hidden="true"><span class="line"></span></span>
     <p class="section-sub">Full projects, from concept to playable build.</p>
   </div>
 
@@ -204,30 +259,32 @@
 
 <!-- ============ ABOUT ============ -->
 <section class="about" id="about">
+  <div class="particle-field" data-count="8" aria-hidden="true"></div>
   <div class="about-frame">
     <div class="frame-corner tl"></div>
     <div class="frame-corner tr"></div>
     <div class="frame-corner bl"></div>
     <div class="frame-corner br"></div>
     <div class="avatar-placeholder">
+      <span class="avatar-glow" aria-hidden="true"></span>
+      <div class="particle-field" data-count="4" aria-hidden="true"></div>
       <i class="fa-solid fa-user"></i>
-      <span>Swap in your photo</span>
     </div>
   </div>
 
   <div class="about-text">
     <p class="eyebrow">About</p>
     <h2>Hi, I'm Your Name.</h2>
-    <p>Write two or three sentences here about who you are as a developer — how you got into Roblox development, what you enjoy building (combat systems, movesets, full experiences), and what you're looking for next.</p>
+    <p>Write two or three sentences here about who you are as a developer — how you got into Roblox development, what you enjoy building (gameplay systems, movesets, full experiences), and what you're looking for next.</p>
     <p>Keep it warm and specific — that lands better than a list of buzzwords.</p>
 
     <ul class="skill-cloud">
       <li>Roblox Studio</li>
       <li>Luau</li>
-      <li>Combat Systems</li>
+      <li>Gameplay Programming</li>
+      <li>Systems Design</li>
       <li>Moveset &amp; Animation</li>
       <li>Tool Scripting</li>
-      <li>Game Design</li>
     </ul>
   </div>
 </section>
@@ -235,6 +292,7 @@
 
 <!-- ============ CONTACT / FOOTER ============ -->
 <footer class="contact" id="contact">
+  <div class="particle-field" data-count="10" aria-hidden="true"></div>
   <p class="eyebrow">Get in Touch</p>
   <h2>Let's build something.</h2>
   <p class="contact-email"><a href="mailto:you@example.com">you@example.com</a></p>

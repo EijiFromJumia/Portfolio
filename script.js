@@ -193,6 +193,64 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 })();
 
 // ==========================================================================
+// Ambient particles — spawns sparkle/mote image assets into each
+// .particle-field container, drifting upward and fading (Genshin-style dust)
+// ==========================================================================
+(function ambientParticles() {
+  if (prefersReducedMotion) return;
+  const fields = document.querySelectorAll('.particle-field');
+  if (!fields.length) return;
+
+  const assets = ['sparkle.svg', 'mote.svg', 'mote-teal.svg'];
+
+  fields.forEach(field => {
+    const count = parseInt(field.dataset.count, 10) || 8;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('img');
+      p.src = assets[Math.floor(Math.random() * assets.length)];
+      p.className = 'particle';
+      p.alt = '';
+      const size = 6 + Math.random() * 12;
+      p.style.setProperty('--x', `${Math.random() * 100}%`);
+      p.style.setProperty('--size', `${size}px`);
+      p.style.setProperty('--duration', `${8 + Math.random() * 10}s`);
+      p.style.setProperty('--delay', `${(Math.random() * -18).toFixed(2)}s`);
+      field.appendChild(p);
+    }
+  });
+})();
+
+// ==========================================================================
+// Weapon icon hover burst — spawns a handful of sparkle/mote images that
+// fly outward and fade, like an elemental proc
+// ==========================================================================
+(function weaponIconBurst() {
+  if (prefersReducedMotion) return;
+  const heads = document.querySelectorAll('.weapon-head, .avatar-placeholder');
+  const assets = ['sparkle.svg', 'mote.svg'];
+
+  heads.forEach(head => {
+    const anchor = head.querySelector('.weapon-icon') || head;
+    head.addEventListener('mouseenter', () => {
+      const burstCount = 5;
+      for (let i = 0; i < burstCount; i++) {
+        const p = document.createElement('img');
+        p.src = assets[i % assets.length];
+        p.className = 'burst-particle';
+        p.alt = '';
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 24 + Math.random() * 20;
+        p.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+        p.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+        p.style.setProperty('--size', `${7 + Math.random() * 6}px`);
+        anchor.appendChild(p);
+        p.addEventListener('animationend', () => p.remove());
+      }
+    });
+  });
+})();
+
+// ==========================================================================
 // Footer year
 // ==========================================================================
 (function footerYear() {
