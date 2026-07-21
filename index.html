@@ -18,6 +18,19 @@
 
 <div class="scroll-rail" aria-hidden="true"><div class="scroll-fill" id="scrollFill"></div></div>
 
+<!-- ============ PRIMARY NAV ============ -->
+<nav class="main-nav" aria-label="Primary">
+  <div class="main-nav-inner">
+    <a href="#home" class="nav-brand" data-tab="home">Eiji</a>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link" data-tab="home">Home</a></li>
+      <li><a href="#programming" class="nav-link" data-tab="programming">Programming</a></li>
+      <li><a href="#environment" class="nav-link" data-tab="environment">Building &amp; Environment</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="tab-panel" data-panel="home">
 <!-- ============ HERO ============ -->
 <header class="hero">
   <canvas id="starfield" aria-hidden="true"></canvas>
@@ -62,7 +75,7 @@
     </ul>
   </div>
 
-  <a href="#codex" class="scroll-cue">
+  <a href="#programming" class="scroll-cue" data-tab="programming">
     <span>View the Reel</span>
     <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
       <path d="M7 1V19M7 19L1 13M7 19L13 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -70,7 +83,34 @@
   </a>
 </header>
 
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="particle-field" data-count="8" aria-hidden="true"></div>
+
+  <div class="about-text">
+    <p class="eyebrow">About</p>
+    <h2>Hi, I'm Eiji</h2>
+    <p>I've been a Roblox developer for 7 years, with a passion for building polished gameplay systems and complete game experiences. 
+      My favorite work involves designing combat, movement, and reusable gameplay frameworks that balance technical depth with great 
+      player feel. I'm looking to contribute to ambitious projects where I can keep growing as both a programmer and game designer.</p>
+
+    <ul class="skill-cloud">
+      <li>Roblox Studio</li>
+      <li>Gameplay Programming</li>
+      <li>Systems Programming</li>
+      <li>Front/Back end</li>
+      <li>Data Programming</li>
+      <li>Optimization</li>
+      <li>...</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
 <main>
+
+<div class="tab-panel" data-panel="programming" hidden>
 
 <!-- ============ MOVESET CODEX ============ -->
 <section class="codex" id="codex">
@@ -281,29 +321,123 @@
   </div>
 </section>
 
-<!-- ============ ABOUT ============ -->
-<section class="about" id="about">
-  <div class="particle-field" data-count="8" aria-hidden="true"></div>
+</div>
 
-  <div class="about-text">
-    <p class="eyebrow">About</p>
-    <h2>Hi, I'm Eiji</h2>
-    <p>I've been a Roblox developer for 7 years, with a passion for building polished gameplay systems and complete game experiences. 
-      My favorite work involves designing combat, movement, and reusable gameplay frameworks that balance technical depth with great 
-      player feel. I'm looking to contribute to ambitious projects where I can keep growing as both a programmer and game designer.</p>
+<div class="tab-panel" data-panel="environment" hidden>
 
-    <ul class="skill-cloud">
-      <li>Roblox Studio</li>
-      <li>Gameplay Programming</li>
-      <li>Systems Programming</li>
-      <li>Front/Back end</li>
-      <li>Data Programming</li>
-      <li>Optimization</li>
-      <li>...</li>
-    </ul>
+<!-- ============ BUILDING & ENVIRONMENT ============ -->
+<section class="environment" id="environment">
+  <div class="particle-field" data-count="14" aria-hidden="true"></div>
+  <div class="section-head">
+    <p class="eyebrow">World Building</p>
+    <h2>Building &amp; Environment</h2>
+    <span class="divider-shimmer" aria-hidden="true"><span class="line"></span></span>
+    <p class="section-sub">Terrain, structures, and environment art built and captured directly in Roblox Studio.</p>
   </div>
+
+  <div class="weapon-group" data-element="terra">
+    <div class="weapon-head">
+      <span class="weapon-icon" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M20 4 L34 12 L34 28 L20 36 L6 28 L6 12 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M20 4 L20 20 M6 12 L20 20 M34 12 L20 20" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      </span>
+      <h3>Environment Builds</h3>
+      <span class="weapon-count">21 clips</span>
+    </div>
+    <div class="clip-grid">
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673466/Roblox-2026-07-21T20_25_09.253Z_tznavb.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673466/Roblox-2026-07-21T20_25_09.253Z_tznavb.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 01<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673466/Roblox-2026-07-21T20_25_09.253Z_tznavb.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673467/Roblox-2026-07-21T20_08_36.581Z_gp1ozo.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673467/Roblox-2026-07-21T20_08_36.581Z_gp1ozo.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 02<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673467/Roblox-2026-07-21T20_08_36.581Z_gp1ozo.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673467/Roblox-2026-07-21T20_08_22.253Z_r44rvh.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673467/Roblox-2026-07-21T20_08_22.253Z_r44rvh.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 03<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673467/Roblox-2026-07-21T20_08_22.253Z_r44rvh.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673481/Roblox-2026-07-21T20_26_08.489Z_dvq3ik.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673481/Roblox-2026-07-21T20_26_08.489Z_dvq3ik.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 04<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673481/Roblox-2026-07-21T20_26_08.489Z_dvq3ik.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673486/Roblox-2026-07-21T21_14_33.086Z_pnwwxm.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673486/Roblox-2026-07-21T21_14_33.086Z_pnwwxm.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 05<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673486/Roblox-2026-07-21T21_14_33.086Z_pnwwxm.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673492/Roblox-2026-07-21T21_12_42.246Z_tivqmc.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673492/Roblox-2026-07-21T21_12_42.246Z_tivqmc.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 06<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673492/Roblox-2026-07-21T21_12_42.246Z_tivqmc.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673508/Roblox-2026-07-21T21_18_35.836Z_teu3ur.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673508/Roblox-2026-07-21T21_18_35.836Z_teu3ur.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 07<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673508/Roblox-2026-07-21T21_18_35.836Z_teu3ur.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673483/Roblox-2026-07-21T21_56_43.118Z_waejnz.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673483/Roblox-2026-07-21T21_56_43.118Z_waejnz.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 08<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673483/Roblox-2026-07-21T21_56_43.118Z_waejnz.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673475/Roblox-2026-07-21T21_55_02.061Z_ihj6wh.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673475/Roblox-2026-07-21T21_55_02.061Z_ihj6wh.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 09<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673475/Roblox-2026-07-21T21_55_02.061Z_ihj6wh.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673512/Roblox-2026-07-21T21_57_31.256Z_yusqof.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673512/Roblox-2026-07-21T21_57_31.256Z_yusqof.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 10<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673512/Roblox-2026-07-21T21_57_31.256Z_yusqof.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673511/Roblox-2026-07-21T21_57_42.374Z_e0he4k.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673511/Roblox-2026-07-21T21_57_42.374Z_e0he4k.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 11<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673511/Roblox-2026-07-21T21_57_42.374Z_e0he4k.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673537/Roblox-2026-07-21T21_58_17.867Z_zwzxlv.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673537/Roblox-2026-07-21T21_58_17.867Z_zwzxlv.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 12<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673537/Roblox-2026-07-21T21_58_17.867Z_zwzxlv.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673515/Roblox-2026-07-21T21_58_03.043Z_i8rjlv.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673515/Roblox-2026-07-21T21_58_03.043Z_i8rjlv.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 13<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673515/Roblox-2026-07-21T21_58_03.043Z_i8rjlv.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673579/Roblox-2026-07-21T21_58_38.629Z_vjzzhh.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673579/Roblox-2026-07-21T21_58_38.629Z_vjzzhh.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 14<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673579/Roblox-2026-07-21T21_58_38.629Z_vjzzhh.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673495/Roblox-2026-07-21T21_57_18.148Z_cwjmkc.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673495/Roblox-2026-07-21T21_57_18.148Z_cwjmkc.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 15<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673495/Roblox-2026-07-21T21_57_18.148Z_cwjmkc.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673535/Roblox-2026-07-21T21_59_20.922Z_kc6qev.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673535/Roblox-2026-07-21T21_59_20.922Z_kc6qev.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 16<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673535/Roblox-2026-07-21T21_59_20.922Z_kc6qev.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673559/Roblox-2026-07-21T22_00_29.723Z_z9odm9.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673559/Roblox-2026-07-21T22_00_29.723Z_z9odm9.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 17<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673559/Roblox-2026-07-21T22_00_29.723Z_z9odm9.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673555/Roblox-2026-07-21T21_59_06.988Z_o47lhe.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673555/Roblox-2026-07-21T21_59_06.988Z_o47lhe.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 18<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673555/Roblox-2026-07-21T21_59_06.988Z_o47lhe.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673629/Roblox-2026-07-21T22_29_29.997Z_d46lwj.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673629/Roblox-2026-07-21T22_29_29.997Z_d46lwj.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 19<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673629/Roblox-2026-07-21T22_29_29.997Z_d46lwj.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673571/Roblox-2026-07-21T22_03_50.687Z_tm5uvx.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673571/Roblox-2026-07-21T22_03_50.687Z_tm5uvx.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 20<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673571/Roblox-2026-07-21T22_03_50.687Z_tm5uvx.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+      <figure class="clip">
+        <div class="clip-media tilt"><video muted loop playsinline preload="none" poster="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673618/Roblox-2026-07-21T22_30_04.128Z_oppjtv.jpg" data-src="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673618/Roblox-2026-07-21T22_30_04.128Z_oppjtv.mp4"></video><div class="glare"></div><div class="shine"></div></div>
+        <figcaption><span class="gem"></span>Clip 21<a href="https://res.cloudinary.com/vddrlxxg/video/upload/v1784673618/Roblox-2026-07-21T22_30_04.128Z_oppjtv.mp4" target="_blank" rel="noopener" class="clip-link" aria-label="Open original clip"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="particle-field" data-count="10" aria-hidden="true"></div>
 </section>
+
+</div>
+
 </main>
+
 
 <!-- ============ CONTACT / FOOTER ============ -->
 <footer class="contact" id="contact">

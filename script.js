@@ -4,6 +4,67 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ==========================================================================
+// Tab router — Home / Programming / Building & Environment
+// Only one .tab-panel is visible at a time, driven by the URL hash so
+// links are shareable and the back/forward buttons work as expected.
+// ==========================================================================
+(function tabRouter() {
+  const panels = Array.from(document.querySelectorAll('.tab-panel'));
+  const navTargets = Array.from(document.querySelectorAll('[data-tab]'));
+  if (!panels.length) return;
+
+  const validTabs = panels.map(p => p.dataset.panel);
+
+  function revealPanelContent(panel) {
+    // scroll-reveal and lazy video loading are IntersectionObserver-driven;
+    // panels hidden via [hidden] never intersect, so force them in on activation
+    panel.querySelectorAll('.clip, .game-entry, .about').forEach(el => {
+      el.classList.add('in-view');
+    });
+    panel.querySelectorAll('.clip-media video[data-src]').forEach(video => {
+      if (!video.src) video.src = video.dataset.src;
+      video.play().catch(() => {});
+    });
+  }
+
+  function activate(tab, { scroll = true } = {}) {
+    if (!validTabs.includes(tab)) tab = validTabs[0];
+
+    panels.forEach(panel => {
+      const isActive = panel.dataset.panel === tab;
+      const wasHidden = panel.hidden;
+      panel.hidden = !isActive;
+      // only force-reveal when a panel is freshly switched into —
+      // the initially-active panel keeps its natural scroll-triggered fade-in
+      if (isActive && wasHidden) revealPanelContent(panel);
+    });
+
+    navTargets.forEach(link => {
+      link.classList.toggle('active', link.dataset.tab === tab);
+    });
+
+    if (scroll) {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }
+  }
+
+  navTargets.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tab = link.dataset.tab;
+      if (location.hash !== `#${tab}`) history.pushState(null, '', `#${tab}`);
+      activate(tab);
+    });
+  });
+
+  window.addEventListener('popstate', () => {
+    activate((location.hash || '#home').slice(1), { scroll: false });
+  });
+
+  activate((location.hash || '#home').slice(1), { scroll: false });
+})();
+
+// ==========================================================================
 // Starfield (hero background) with subtle cursor parallax
 // ==========================================================================
 (function starfield() {

@@ -22,6 +22,7 @@
   --el-aether: #b895d9;
   --el-umbra:  #8a4f6e;
   --el-volt:   #e0567e;
+  --el-terra:  #c9915a;
 
   /* type */
   --font-display: 'Cormorant Garamond', serif;
@@ -512,11 +513,13 @@ h1, h2, h3 {
 .codex > .particle-field,
 .games > .particle-field,
 .about > .particle-field,
-.contact > .particle-field { z-index: 0; }
+.contact > .particle-field,
+.environment > .particle-field { z-index: 0; }
 .codex > *:not(.particle-field),
 .games > *:not(.particle-field),
 .about > *:not(.particle-field),
-.contact > *:not(.particle-field) {
+.contact > *:not(.particle-field),
+.environment > *:not(.particle-field) {
   position: relative;
   z-index: 1;
 }
@@ -638,6 +641,7 @@ h1, h2, h3 {
 .weapon-group[data-element="umbra"]  { --local: var(--el-umbra); }
 .weapon-group[data-element="ember"]  { --local: var(--el-ember); }
 .weapon-group[data-element="volt"]   { --local: var(--el-volt); }
+.weapon-group[data-element="terra"]  { --local: var(--el-terra); }
 
 .weapon-head {
   display: flex;
@@ -850,3 +854,77 @@ figcaption .gem { background: var(--local); }
   .clip-media video { transition: none !important; transform: none !important; }
   .glare { display: none; }
 }
+
+/* ==========================================================================
+   BUILDING & ENVIRONMENT SECTION
+   ========================================================================== */
+.environment {
+  position: relative;
+  padding: clamp(4rem, 10vh, 7rem) 0;
+  background: var(--bg-night);
+}
+
+/* ==========================================================================
+   PRIMARY NAV
+   ========================================================================== */
+.main-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(12, 17, 32, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-hairline);
+}
+.main-nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.85rem var(--edge);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-parchment);
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.nav-link {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.nav-link:hover, .nav-link:focus-visible {
+  color: var(--text-parchment);
+  border-color: var(--line-hairline);
+}
+.nav-link.active {
+  color: var(--bg-void);
+  background: var(--accent-gold);
+}
+@media (max-width: 700px) {
+  .main-nav-inner { justify-content: center; text-align: center; }
+  .nav-links { justify-content: center; width: 100%; }
+}
+
+/* ==========================================================================
+   TAB PANELS — only one visible at a time (toggled via [hidden] in JS)
+   ========================================================================== */
+.tab-panel { position: relative; }
