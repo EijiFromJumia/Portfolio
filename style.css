@@ -714,6 +714,20 @@ h1, h2, h3 {
   gap: 1.4rem;
 }
 
+/* Building & Environment: fewer, larger tiles per row — this section has the
+   most clips, so capping it at two columns keeps only a handful of videos
+   near the viewport (and therefore eligible to load/play) at once instead
+   of a dozen-plus, which was causing heavy lag and crashes. */
+#environment .clip-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.8rem;
+}
+@media (max-width: 640px) {
+  #environment .clip-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .clip {
   background: var(--bg-panel);
   border: 1px solid var(--line-hairline);
@@ -772,6 +786,48 @@ h1, h2, h3 {
   opacity: 0.85;
   transform: translateX(140%);
   transition: transform 0.95s ease, opacity 0.95s ease;
+}
+
+/* Click-to-play overlay — shown on clips whose measured duration is over
+   5s, so long clips don't all autoplay/decode at once. */
+.clip-play-btn {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 8, 6, 0.38);
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.clip-media.needs-click .clip-play-btn { display: flex; }
+.clip-media.needs-click.is-playing .clip-play-btn { display: none; }
+.clip-play-btn .play-icon {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--local, #d9b571) 88%, black 0%);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease;
+}
+.clip-play-btn:hover .play-icon,
+.clip-play-btn:focus-visible .play-icon { transform: scale(1.08); }
+.clip-play-btn .play-icon::after {
+  content: '';
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-style: solid;
+  border-width: 9px 0 9px 15px;
+  border-color: transparent transparent transparent #14110c;
 }
 
 figcaption {

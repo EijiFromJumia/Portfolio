@@ -16,14 +16,16 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   const validTabs = panels.map(p => p.dataset.panel);
 
   function revealPanelContent(panel) {
-    // scroll-reveal and lazy video loading are IntersectionObserver-driven;
-    // panels hidden via [hidden] never intersect, so force them in on activation
+    // scroll-reveal is IntersectionObserver-driven; panels hidden via
+    // [hidden] never intersect, so force the fade-in state in on activation.
+    // Video loading/playback is intentionally left to the IntersectionObserver
+    // in clipPlayback() below — it re-evaluates once the panel is unhidden.
+    // Previously this force-loaded and force-played every clip in the panel
+    // the instant its tab was opened, which meant switching to a section
+    // with a couple dozen clips kicked off that many simultaneous video
+    // loads and decodes at once — the main cause of the lag/crashes.
     panel.querySelectorAll('.clip, .game-entry, .about').forEach(el => {
       el.classList.add('in-view');
-    });
-    panel.querySelectorAll('.clip-media video[data-src]').forEach(video => {
-      if (!video.src) video.src = video.dataset.src;
-      video.play().catch(() => {});
     });
   }
 
@@ -196,11 +198,68 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 })();
 
 // ==========================================================================
-// Moveset clips: lazy-load the mp4 source and only play while on screen
+// Clips: lazy-load the mp4 source and only play while on screen.
+// Clips measuring under 5s autoplay (muted/looped) once they scroll into
+// view, same as before. Clips 5s or longer get a click-to-play button
+// instead — with sections running a couple dozen clips, autoplaying every
+// long one at once was what caused the lag/crashes, so those now wait for
+// a deliberate click. Once a person starts one, it keeps playing normally
+// (pausing off-screen, resuming back in view) just like a short clip.
 // ==========================================================================
 (function clipPlayback() {
   const videos = document.querySelectorAll('.clip-media video[data-src]');
-  if (!videos.length || !('IntersectionObserver' in window)) {
+  if (!videos.length) return;
+
+  const AUTOPLAY_MAX_SECONDS = 5;
+
+  function ensurePlayButton(media, video) {
+    if (media.querySelector('.clip-play-btn')) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'clip-play-btn';
+    btn.setAttribute('aria-label', 'Play clip');
+    btn.innerHTML = '<span class="play-icon" aria-hidden="true"></span>';
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.dataset.userStarted = 'true';
+      media.classList.add('is-playing');
+      video.play().catch(() => {});
+    });
+    media.appendChild(btn);
+  }
+
+  function maybePlay(video, media) {
+    if (!media.classList.contains('in-viewport')) return;
+    const isLong = media.classList.contains('needs-click');
+    const started = video.dataset.userStarted === 'true';
+    if (isLong && !started) return; // wait for a click instead of autoplaying
+    video.play().catch(() => {}); // ignore autoplay rejection
+    media.classList.add('is-playing');
+  }
+
+  function classify(video, media) {
+    // duration is only known once metadata has loaded
+    if (Number.isFinite(video.duration) && video.duration >= AUTOPLAY_MAX_SECONDS) {
+      media.classList.add('needs-click');
+      ensurePlayButton(media, video);
+      if (video.dataset.userStarted !== 'true') {
+        video.pause();
+        media.classList.remove('is-playing');
+      }
+    }
+  }
+
+  function load(video, media) {
+    if (video.dataset.loading || video.src) return;
+    video.dataset.loading = 'true';
+    video.addEventListener('loadedmetadata', () => {
+      classify(video, media);
+      maybePlay(video, media);
+    }, { once: true });
+    video.src = video.dataset.src;
+  }
+
+  if (!('IntersectionObserver' in window)) {
     // fallback: just load everything, no autoplay
     videos.forEach(v => { v.src = v.dataset.src; });
     return;
@@ -209,10 +268,19 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const video = entry.target;
+      const media = video.closest('.clip-media');
+      if (!media) return;
       if (entry.isIntersecting) {
-        if (!video.src) video.src = video.dataset.src;
-        video.play().catch(() => {}); // ignore autoplay rejection
+        media.classList.add('in-viewport');
+        if (!video.src) {
+          load(video, media);
+        } else if (Number.isFinite(video.duration)) {
+          maybePlay(video, media);
+        }
+        // if src is set but metadata hasn't loaded yet, the loadedmetadata
+        // handler registered in load() will call maybePlay() itself
       } else {
+        media.classList.remove('in-viewport', 'is-playing');
         video.pause();
       }
     });
