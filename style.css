@@ -723,6 +723,21 @@ h1, h2, h3 {
   gap: 1.8rem;
 }
 
+/* Moveset Codex: larger tiles, 3 per row instead of the default 4. */
+#codex .clip-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 900px) {
+  #codex .clip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  #codex .clip-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .clip {
   background: var(--bg-panel);
   border: 1px solid var(--line-hairline);
