@@ -710,22 +710,17 @@ h1, h2, h3 {
 
 .clip-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.4rem;
 }
 
-/* Building & Environment: fewer, larger tiles per row — this section has the
-   most clips, so capping it at two columns keeps only a handful of videos
-   near the viewport (and therefore eligible to load/play) at once instead
-   of a dozen-plus, which was causing heavy lag and crashes. */
+/* Building & Environment: one tile per row, same as every other section —
+   this also keeps only a handful of videos near the viewport (and therefore
+   eligible to load/play) at once instead of a dozen-plus, which was causing
+   heavy lag and crashes. */
 #environment .clip-grid {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 1.8rem;
-}
-@media (max-width: 640px) {
-  #environment .clip-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .clip {
